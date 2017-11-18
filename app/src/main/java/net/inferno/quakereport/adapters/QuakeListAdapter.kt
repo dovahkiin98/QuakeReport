@@ -29,10 +29,10 @@ class QuakeListAdapter(context: Context, list: List<EarthQuake>) : ArrayAdapter<
         val quake = getItem(position)
 
         magText?.text = DecimalFormat("0.0").format(quake.mag)
-        titleText?.text = quake.title
-        placeText?.text = quake.place
-        dateText?.text = DateFormat.format("MMM dd yyyy", quake.date)
-        timeText?.text = DateFormat.format("hh:mm a", quake.date)
+        titleText?.text = quake.titleShort
+        placeText?.text = quake.placeShort
+        dateText?.text = DateFormat.format("MMM dd yyyy", quake.time)
+        timeText?.text = DateFormat.format("hh:mm a", quake.time)
 
         val colorId = when (Math.floor(quake.mag).toInt()) {
             0, 1 -> R.color.magnitude1
