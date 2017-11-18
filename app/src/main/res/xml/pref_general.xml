@@ -1,0 +1,30 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="Preferences">
+
+        <EditTextPreference
+            android:defaultValue="0"
+            android:inputType="numberDecimal"
+            android:key="minmag"
+            android:maxLines="1"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:summary="0"
+            android:title="Minimum Magnitude" />
+
+        <ListPreference
+            android:defaultValue="time"
+            android:entries="@array/settings_order"
+            android:entryValues="@array/order_values"
+            android:key="orderby"
+            android:summary="time"
+            android:title="Sort By" />
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="location"
+            android:summary="Only show earthquakes near your current location (requires Location Permission)"
+            android:title="Show Only Events near me" />
+    </PreferenceCategory>
+
+</PreferenceScreen>
