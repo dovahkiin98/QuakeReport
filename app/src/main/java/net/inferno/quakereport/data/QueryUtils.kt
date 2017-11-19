@@ -30,8 +30,8 @@ object QueryUtils {
         val longitude = prefs.getString("longitude", "")
 
         uri.appendQueryParameter("format", "geojson")
-        uri.appendQueryParameter("minMag", minMag)
-        uri.appendQueryParameter("orderBy", orderBy)
+        uri.appendQueryParameter("minmag", minMag)
+        uri.appendQueryParameter("orderby", orderBy)
         uri.appendQueryParameter("starttime", DateFormat.format("yyyy-MM-dd", Calendar.getInstance()).toString())
 
         if (longitude != "" || latitude != "") {

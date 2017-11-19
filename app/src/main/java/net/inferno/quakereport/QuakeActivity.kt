@@ -28,6 +28,7 @@ class QuakeActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceC
         setContentView(R.layout.activity_quake)
 
         QueryUtils.init(this)
+        loadData()
         earthquakeListView.emptyView = emptyList
 
         earthquakeListView.setOnItemClickListener { parent, _, position, _ ->
@@ -41,6 +42,7 @@ class QuakeActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceC
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
         QueryUtils.params(sharedPreferences)
+        progressBar.visibility = View.VISIBLE
         if (key == getString(R.string.location_key) && sharedPreferences.getBoolean(key, false)) {
             val intent = Intent(this, LocationService::class.java)
             startService(intent)
@@ -82,13 +84,9 @@ class QuakeActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceC
         else -> super.onOptionsItemSelected(item)
     }
 
-    override fun onStop() {
-        super.onStop()
-        handler.removeCallbacksAndMessages(null)
-    }
-
     override fun onDestroy() {
         super.onDestroy()
+        handler.removeCallbacksAndMessages(null)
         PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(this)
     }
 }
