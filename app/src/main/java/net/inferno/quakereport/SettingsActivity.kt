@@ -29,8 +29,8 @@ class SettingsActivity : AppCompatActivity() {
             val location = findPreference(getString(R.string.location_key)) as SwitchPreference
 
             minMagnitude.setOnPreferenceChangeListener { _, newValue -> minMagnitude.summary = newValue.toString(); true }
-            orderBy.setOnPreferenceChangeListener { listPreference, _ ->
-                orderBy.summary = (listPreference as ListPreference).entry
+            orderBy.setOnPreferenceChangeListener { _, newValue ->
+                orderBy.summary = newValue.toString()
                 true
             }
             location.setOnPreferenceClickListener {
