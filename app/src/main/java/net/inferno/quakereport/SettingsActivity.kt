@@ -33,7 +33,6 @@ class SettingsActivity : AppCompatActivity() {
                 orderBy.summary = (listPreference as ListPreference).entry
                 true
             }
-
             location.setOnPreferenceClickListener {
                 if (location.isChecked) {
                     ActivityCompat.requestPermissions(activity,
@@ -50,6 +49,9 @@ class SettingsActivity : AppCompatActivity() {
                 LocationService.willUpdate = location.isChecked
                 true
             }
+
+            minMagnitude.summary = preferenceScreen.sharedPreferences.getString(getString(R.string.minMag_key), "0")
+            orderBy.summary = preferenceScreen.sharedPreferences.getString(getString(R.string.sortBy_key), "Time")
         }
     }
 

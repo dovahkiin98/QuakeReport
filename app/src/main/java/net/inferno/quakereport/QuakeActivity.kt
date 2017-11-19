@@ -27,6 +27,7 @@ class QuakeActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceC
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quake)
 
+        QueryUtils.init(this)
         earthquakeListView.emptyView = emptyList
 
         earthquakeListView.setOnItemClickListener { parent, _, position, _ ->
@@ -40,7 +41,7 @@ class QuakeActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceC
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
         QueryUtils.params(sharedPreferences)
-        if (sharedPreferences.getBoolean(key, false)) {
+        if (key == getString(R.string.location_key) && sharedPreferences.getBoolean(key, false)) {
             val intent = Intent(this, LocationService::class.java)
             startService(intent)
         } else loadData()
