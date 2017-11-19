@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
+import android.preference.PreferenceManager
 import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
@@ -33,6 +34,8 @@ class QuakeActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceC
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(quake.url))
             ActivityCompat.startActivity(this@QuakeActivity, intent, null)
         }
+
+        PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this)
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
@@ -81,5 +84,10 @@ class QuakeActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceC
     override fun onStop() {
         super.onStop()
         handler.removeCallbacksAndMessages(null)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(this)
     }
 }
