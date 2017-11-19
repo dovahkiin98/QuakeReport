@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="minMag_title">Minimum Magnitude</string>
+    <string name="minMag_key">minMag</string>
+
+    <string name="sortBy_title">Sort By</string>
+    <string name="sortBy_key">orderBy</string>
+    <string-array name="settings_order">
+        <item>Time</item>
+        <item>Time Ascending</item>
+        <item>Magnitude</item>
+        <item>Magnitude Ascending</item>
+    </string-array>
+
+    <string-array name="order_values">
+        <item>time</item>
+        <item>time-asc</item>
+        <item>magnitude</item>
+        <item>magnitude-asc</item>
+    </string-array>
+
+    <string name="location_summary">Only show earthquakes near your current location (requires Location Permission)</string>
+    <string name="location_title">Show Only Events near me</string>
+    <string name="location_key">location</string>
+</resources>
