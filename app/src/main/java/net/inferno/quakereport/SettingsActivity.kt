@@ -3,10 +3,7 @@ package net.inferno.quakereport
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.preference.Preference
-import android.preference.PreferenceFragment
-import android.preference.PreferenceManager
-import android.preference.SwitchPreference
+import android.preference.*
 import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
@@ -21,18 +18,18 @@ class SettingsActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
-    class GeneralPreferenceFragment : PreferenceFragment(), Preference.OnPreferenceChangeListener {
+    class GeneralPreferenceFragment : PreferenceFragment() {
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
             addPreferencesFromResource(R.xml.pref_general)
 
-            val minMagnitude = findPreference("minmag")
-            val orderBy = findPreference("orderby")
-            val location = findPreference("location") as SwitchPreference
+            val minMagnitude = findPreference(getString(R.string.minMag_key)) as EditTextPreference
+            val orderBy = findPreference(getString(R.string.sortBy_key)) as ListPreference
+            val location = findPreference(getString(R.string.location_key)) as SwitchPreference
 
-            bindPreferenceSummaryToValue(orderBy)
-            bindPreferenceSummaryToValue(minMagnitude)
+            minMagnitude.setOnPreferenceChangeListener { _, newValue -> minMagnitude.summary = newValue.toString(); true }
+            orderBy.setOnPreferenceChangeListener { _, newValue -> orderBy.summary = newValue.toString(); true }
 
             location.setOnPreferenceClickListener {
                 if (location.isChecked) {
@@ -50,19 +47,6 @@ class SettingsActivity : AppCompatActivity() {
                 LocationService.willUpdate = location.isChecked
                 true
             }
-        }
-
-        override fun onPreferenceChange(preference: Preference, newValue: Any): Boolean {
-            val stringValue = newValue.toString()
-            preference.summary = stringValue
-            return true
-        }
-
-        private fun bindPreferenceSummaryToValue(preference: Preference) {
-            preference.onPreferenceChangeListener = this
-            val preferences = PreferenceManager.getDefaultSharedPreferences(preference.context)
-            val preferenceString = preferences.getString(preference.key, "")
-            onPreferenceChange(preference, preferenceString)
         }
     }
 

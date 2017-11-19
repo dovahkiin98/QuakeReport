@@ -13,10 +13,11 @@ import android.support.v4.app.ActivityCompat
 
 class LocationService : Service(), LocationListener {
 
-    lateinit var locationManager: LocationManager
+    private lateinit var locationManager: LocationManager
 
     companion object {
         var willUpdate = false
+        val LOCATION = "com.inferno.quakeReport.location"
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {

@@ -4,18 +4,4 @@
     <string name="empty_list">No Earthquakes happened yet today</string>
     <string name="title_activity_settings">Settings</string>
     <string name="action_settings">Settings</string>
-
-    <string-array name="settings_order">
-        <item>Time</item>
-        <item>Time Ascending</item>
-        <item>Magnitude</item>
-        <item>Magnitude Ascending</item>
-    </string-array>
-
-    <string-array name="order_values">
-        <item>time</item>
-        <item>time-asc</item>
-        <item>magnitude</item>
-        <item>magnitude-asc</item>
-    </string-array>
 </resources>

@@ -21,17 +21,17 @@ object QueryUtils {
         params(PreferenceManager.getDefaultSharedPreferences(context))
     }
 
-    private fun params(prefs: SharedPreferences) {
+    fun params(prefs: SharedPreferences) {
         val uri = Uri.parse(uri).buildUpon()
 
-        val orderby = prefs.getString("orderby", "time")
-        val minmag = prefs.getString("minmag", "0")
+        val orderBy = prefs.getString("orderBy", "time")
+        val minMag = prefs.getString("minMag", "0")
         val latitude = prefs.getString("latitude", "")
         val longitude = prefs.getString("longitude", "")
 
         uri.appendQueryParameter("format", "geojson")
-        uri.appendQueryParameter("minmag", minmag)
-        uri.appendQueryParameter("orderby", orderby)
+        uri.appendQueryParameter("minMag", minMag)
+        uri.appendQueryParameter("orderBy", orderBy)
         uri.appendQueryParameter("starttime", DateFormat.format("yyyy-MM-dd", Calendar.getInstance()).toString())
 
         if (longitude != "" || latitude != "") {

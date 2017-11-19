@@ -1,13 +1,10 @@
 package net.inferno.quakereport
 
-import android.content.BroadcastReceiver
-import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
-import android.preference.PreferenceManager
 import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
@@ -22,15 +19,8 @@ import net.inferno.quakereport.adapters.QuakeListAdapter
 import net.inferno.quakereport.data.EarthQuake
 import net.inferno.quakereport.data.QueryUtils
 
-class QuakeActivity : AppCompatActivity() {
-
+class QuakeActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
     private val handler = Handler()
-    private val broadcastReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent?) {
-            QueryUtils.init(this@QuakeActivity)
-            loadData()
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,16 +35,12 @@ class QuakeActivity : AppCompatActivity() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        QueryUtils.init(this)
-        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("location", false)
-                && !broadcastReceiver.isOrderedBroadcast) {
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
+        QueryUtils.params(sharedPreferences)
+        if (sharedPreferences.getBoolean(key, false)) {
             val intent = Intent(this, LocationService::class.java)
             startService(intent)
-            registerReceiver(broadcastReceiver, IntentFilter("com.inferno.quakeReport.location"))
-        }
-        loadData()
+        } else loadData()
     }
 
     private fun loadData() {
@@ -94,7 +80,6 @@ class QuakeActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
-        if (broadcastReceiver.isOrderedBroadcast) unregisterReceiver(broadcastReceiver)
         handler.removeCallbacksAndMessages(null)
     }
 }

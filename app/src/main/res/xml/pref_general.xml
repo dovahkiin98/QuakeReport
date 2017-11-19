@@ -5,26 +5,26 @@
         <EditTextPreference
             android:defaultValue="0"
             android:inputType="numberDecimal"
-            android:key="minmag"
+            android:key="@string/minMag_key"
             android:maxLines="1"
             android:selectAllOnFocus="true"
             android:singleLine="true"
             android:summary="0"
-            android:title="Minimum Magnitude" />
+            android:title="@string/minMag_title" />
 
         <ListPreference
             android:defaultValue="time"
             android:entries="@array/settings_order"
             android:entryValues="@array/order_values"
-            android:key="orderby"
-            android:summary="time"
-            android:title="Sort By" />
+            android:key="@string/sortBy_key"
+            android:summary="Time"
+            android:title="@string/sortBy_title" />
 
         <SwitchPreference
             android:defaultValue="false"
-            android:key="location"
-            android:summary="Only show earthquakes near your current location (requires Location Permission)"
-            android:title="Show Only Events near me" />
+            android:key="@string/location_key"
+            android:summary="@string/location_summary"
+            android:title="@string/location_title" />
     </PreferenceCategory>
 
 </PreferenceScreen>
