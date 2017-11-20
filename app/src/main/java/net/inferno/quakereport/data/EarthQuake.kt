@@ -6,6 +6,6 @@ class EarthQuake(
         var time: Long = 0L,
         var url: String = ""
 ) {
-    val titleShort get() = place.substringBefore(" of") + "of"
+    val titleShort get() = place.substringBefore(" of") + " of"
     val placeShort get() = place.substringAfter(" of ")
 }

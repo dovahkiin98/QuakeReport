@@ -43,10 +43,9 @@ class QuakeActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceC
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
         QueryUtils.params(sharedPreferences)
         progressBar.visibility = View.VISIBLE
-        if (key == getString(R.string.location_key) && sharedPreferences.getBoolean(key, false)) {
-            val intent = Intent(this, LocationService::class.java)
-            startService(intent)
-        } else loadData()
+        if (key == getString(R.string.location_key) && sharedPreferences.getBoolean(key, false))
+            startService(Intent(this, LocationService::class.java))
+        else loadData()
     }
 
     private fun loadData() {
@@ -87,6 +86,7 @@ class QuakeActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceC
     override fun onDestroy() {
         super.onDestroy()
         handler.removeCallbacksAndMessages(null)
+        stopService(Intent(this, LocationService::class.java))
         PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(this)
     }
 }

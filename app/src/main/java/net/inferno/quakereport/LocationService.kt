@@ -25,7 +25,7 @@ class LocationService : Service(), LocationListener {
         return Service.START_NOT_STICKY
     }
 
-    private fun getLocation() {
+    private fun getLocation(): Boolean {
         ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
         locationManager = this.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
@@ -39,8 +39,9 @@ class LocationService : Service(), LocationListener {
             isNetworkEnabled -> {
                 locationManager.requestSingleUpdate(LocationManager.NETWORK_PROVIDER, this, null)
             }
-            else -> return
+            else -> return false
         }
+        return true
     }
 
     override fun onLocationChanged(location: Location) {
