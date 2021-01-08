@@ -4,21 +4,21 @@
 
         <EditTextPreference
             android:defaultValue="0"
-            android:inputType="numberDecimal"
-            android:key="@string/minMag_key"
+            android:inputType="number"
+            android:key="a"
             android:maxLines="1"
             android:selectAllOnFocus="true"
             android:singleLine="true"
             android:summary="0"
-            android:title="@string/minMag_title" />
+            android:title="@string/minmag_title" />
 
         <ListPreference
             android:defaultValue="time"
-            android:entries="@array/settings_order"
+            android:entries="@array/order_text"
             android:entryValues="@array/order_values"
-            android:key="@string/sortBy_key"
+            android:key="b"
             android:summary="Time"
-            android:title="@string/sortBy_title" />
+            android:title="@string/orderby_title" />
 
         <SwitchPreference
             android:defaultValue="false"
