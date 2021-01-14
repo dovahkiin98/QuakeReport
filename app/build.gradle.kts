@@ -152,8 +152,8 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling:${Versions.compose}")
     implementation("androidx.compose.runtime:runtime-livedata:${Versions.compose}")
 
-    implementation("androidx.navigation:navigation-compose:1.0.0-alpha04")
-    implementation("androidx.paging:paging-compose:1.0.0-alpha04")
+    implementation("androidx.navigation:navigation-compose:1.0.0-alpha05")
+    implementation("androidx.paging:paging-compose:1.0.0-alpha05")
     //endregion
 
     //region Networking

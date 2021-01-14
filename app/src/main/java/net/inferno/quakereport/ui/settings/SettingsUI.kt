@@ -354,7 +354,8 @@ fun MinMagnitudeDialog(
                     .padding(all = 8.dp)
             ) {
                 @OptIn(ExperimentalLayout::class)
-                (FlowRow(
+                @Suppress("DEPRECATION")
+                FlowRow(
                     mainAxisSize = SizeMode.Expand,
                     mainAxisAlignment = MainAxisAlignment.End,
                     mainAxisSpacing = 8.dp,
@@ -368,7 +369,7 @@ fun MinMagnitudeDialog(
                     }) {
                         Text(stringResource(id = android.R.string.ok))
                     }
-                })
+                }
             }
         },
     )
