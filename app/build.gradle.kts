@@ -30,7 +30,6 @@ android {
 
         vectorDrawables.useSupportLibrary = true
         buildFeatures {
-            viewBinding = true
             compose = true
         }
 
@@ -40,8 +39,7 @@ android {
     flavorDimensions("dev")
 
     productFlavors {
-        maybeCreate("dev")
-        getByName("dev") {
+        maybeCreate("dev").apply {
             dimension = "dev"
 
             minSdkVersion(28)
@@ -50,8 +48,7 @@ android {
 
             buildConfigField("boolean", "DEV", "true")
         }
-        maybeCreate("deploy")
-        getByName("deploy") {
+        maybeCreate("deploy").apply {
             dimension = "dev"
 
             minSdkVersion(21)
@@ -67,8 +64,7 @@ android {
             isDebuggable = true
         }
 
-        maybeCreate("preRelease")
-        getByName("preRelease") {
+        maybeCreate("preRelease").apply {
             isMinifyEnabled = true
             isShrinkResources = true
             isDebuggable = true
@@ -108,7 +104,6 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerVersion = Versions.kotlin
         kotlinCompilerExtensionVersion = Versions.compose
     }
 }
@@ -152,8 +147,8 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling:${Versions.compose}")
     implementation("androidx.compose.runtime:runtime-livedata:${Versions.compose}")
 
-    implementation("androidx.navigation:navigation-compose:1.0.0-alpha05")
-    implementation("androidx.paging:paging-compose:1.0.0-alpha05")
+    implementation("androidx.navigation:navigation-compose:1.0.0-alpha06")
+    implementation("androidx.paging:paging-compose:1.0.0-alpha06")
     //endregion
 
     //region Networking

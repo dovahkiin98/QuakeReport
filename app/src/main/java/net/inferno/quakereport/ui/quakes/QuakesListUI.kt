@@ -55,13 +55,19 @@ fun QuakesList(
                         isRefreshing = true
                         earthQuakes.refresh()
                     }) {
-                        Icon(Icons.Default.Refresh)
+                        Icon(
+                            Icons.Default.Refresh,
+                            stringResource(id = R.string.refresh),
+                        )
                     }
 
                     IconButton(onClick = {
                         navController.navigate(SETTINGS_LABEL)
                     }) {
-                        Icon(Icons.Default.Settings)
+                        Icon(
+                            Icons.Default.Settings,
+                            stringResource(id = R.string.action_settings),
+                        )
                     }
                 }
             )

@@ -5,10 +5,13 @@ import android.content.SharedPreferences
 import android.content.res.Configuration
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -107,7 +110,10 @@ fun Settings() {
                     IconButton(onClick = {
                         navController.popBackStack()
                     }) {
-                        Icon(Icons.Default.ArrowBack)
+                        Icon(
+                            Icons.Default.ArrowBack,
+                            stringResource(id = R.string.back),
+                        )
                     }
                 },
                 title = {
@@ -116,9 +122,12 @@ fun Settings() {
             )
         }
     ) {
-        ScrollableColumn(
+        Column(
             modifier = Modifier
                 .padding(vertical = 8.dp)
+                .verticalScroll(
+                    rememberScrollState(),
+                ),
         ) {
             ListItem(
                 text = {
@@ -233,12 +242,12 @@ fun Settings() {
         )
     }
 
-    onActive {
+    DisposableEffect(Unit) {
         prefs.registerOnSharedPreferenceChangeListener(preferencesChangeListener)
-    }
 
-    onDispose {
-        prefs.unregisterOnSharedPreferenceChangeListener(preferencesChangeListener)
+        onDispose {
+            prefs.unregisterOnSharedPreferenceChangeListener(preferencesChangeListener)
+        }
     }
 }
 
@@ -248,17 +257,19 @@ fun OrderByDialog(
     onSelect: (Int) -> Unit,
     selectedItemIndex: Int = 0,
 ) {
+    val orderText = orderText
+
     AlertDialog(
         onDismissRequest = onDismiss,
         buttons = {
-            ScrollableColumn(
+            LazyColumn(
                 modifier = Modifier
-                    .padding(vertical = 16.dp)
+                    .padding(vertical = 8.dp)
             ) {
-                orderText.forEachIndexed { index, s ->
+                itemsIndexed(orderText) { index, text ->
                     ListItem(
                         text = {
-                            Text(s)
+                            Text(text)
                         },
                         icon = {
                             RadioButton(
@@ -376,8 +387,8 @@ fun MinMagnitudeDialog(
 }
 
 fun validateMinMagInput(textValue: String) = (textValue.toFloatOrNull() ?: 0f).takeUnless {
-    it > 10f
-} ?: 10f
+    it > 10f || it < 0f
+} ?: 0f
 
 val orderValues = arrayOf(
     "time",

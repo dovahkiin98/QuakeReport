@@ -6,6 +6,8 @@
     <string name="request_network_error">Internet connectivity is limited or unavailable</string>
 
     <string name="retry">Retry</string>
+    <string name="refresh">Refresh</string>
+    <string name="back">Back</string>
 
     <string name="title_activity_settings">Settings</string>
     <string name="action_settings">Settings</string>

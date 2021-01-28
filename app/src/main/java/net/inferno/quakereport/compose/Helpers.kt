@@ -3,10 +3,7 @@ package net.inferno.quakereport.compose
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.ActivityResultRegistryOwner
 import androidx.activity.result.contract.ActivityResultContract
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.onDispose
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.runtime.*
 import androidx.compose.runtime.savedinstancestate.rememberSavedInstanceState
 import androidx.compose.ui.platform.AmbientContext
 import java.util.*
@@ -35,8 +32,10 @@ fun <I, O> registerForActivityResult(
         }
     }
 
-    onDispose {
-        realLauncher.unregister()
+    DisposableEffect(Unit) {
+        onDispose {
+            realLauncher.unregister()
+        }
     }
 
     return realLauncher
